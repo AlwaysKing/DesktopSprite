@@ -724,8 +724,10 @@ VOID SpriteView::InitialFunc(HINSTANCE hInstance)
 	
 	if(g_hook == NULL)
 	{
+#ifndef DEBUG
 		// HookÈ«¾Ö¹³×Ó
 		g_hook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, hInstance, 0);
+#endif
 	}
 }
 

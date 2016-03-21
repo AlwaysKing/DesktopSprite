@@ -4,119 +4,9 @@
 #include "stdafx.h"
 #include "Sprite.h"
 #include <windows.h>
-#include "UIlib.h"
 #include "SpriteView.h"
-#include <shellapi.h>
-
-// TODO: 在此处引用程序需要的其他头文件
-using namespace DuiLib;
-
-#pragma comment (lib, "GdiPlus.lib")
-
-
-
-class CDuiFrameWnd : public WindowImplBase
-{
-public:
-	virtual LPCTSTR    GetWindowClassName() const
-	{
-		return _T("DUIMainFrame");
-	}
-	virtual CDuiString GetSkinFile()
-	{
-		return _T("duilib.xml");
-	}
-	virtual CDuiString GetSkinFolder()
-	{
-		return _T("");
-	}
-	DUI_DECLARE_MESSAGE_MAP()
-
-	virtual void OnClick(TNotifyUI& msg)
-	{
-		MessageBox(this->GetHWND(), L"", L"", MB_OK);
-	}
-
-	virtual LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-	{
-		LRESULT rv = WindowImplBase::OnCreate(uMsg, wParam, lParam, bHandled);
-		// 注册热键
-		if(!RegisterHotKey(m_hWnd, 1, MOD_ALT | MOD_NOREPEAT, 0x51))
-		{
-			MessageBox(m_hWnd, L"热键注册失败", L"失败", MB_OKCANCEL);
-		}
-
-		// 创建托盘图标
-		CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
-		nid.cbSize = sizeof(nid);
-		nid.hWnd = m_hWnd;
-		nid.uID = 0;
-		nid.uFlags = NIF_ICON | NIF_MESSAGE | NIF_TIP;
-		nid.uCallbackMessage = WM_USER;
-		nid.hIcon = LoadIcon(pCreate->hInstance, MAKEINTRESOURCE(IDI_SPRITE));
-		lstrcpy(nid.szTip, L"多桌面切换v2");
-		Shell_NotifyIcon(NIM_ADD, &nid);
-
-		return rv;
-	}
-
-	virtual LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-	{
-		LRESULT rv = WindowImplBase::OnDestroy(uMsg, wParam, lParam, bHandled);
-		UnregisterHotKey(m_hWnd, 1);
-		Shell_NotifyIcon(NIM_DELETE, &nid);
-		return rv;
-	}
-
-	virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-	{
-		switch (uMsg)
-		{
-			case WM_USER:
-			{
-				// 托盘点击事件处理
-				if(lParam == WM_RBUTTONDOWN)
-				{
-					if(MessageBox(m_hWnd, L"是否关闭Spite", L"询问", MB_OKCANCEL) == IDOK)
-					{
-						// 清理托盘图标
-						Shell_NotifyIcon(NIM_DELETE, &nid);
-						PostQuitMessage(0);
-					}
-				}
-
-				break;
-			}
-			 case  WM_HOTKEY:
-			{
-				if(wParam == 1)
-				{
-					if(IsWindowVisible(m_hWnd))
-					{
-						ShowWindow(false, false);
-					}
-					else
-					{
-						ShowWindow();
-						SetWindowPos(m_hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-					}
-				}
-				break;
-			}
-
-		}
-
-		return 0;
-	}
-
-private:
-	NOTIFYICONDATA nid;
-};
-
-
-DUI_BEGIN_MESSAGE_MAP(CDuiFrameWnd, WindowImplBase)
-DUI_ON_MSGTYPE(DUI_MSGTYPE_CLICK, OnClick)
-DUI_END_MESSAGE_MAP()
+#include "MainFrame.h"
+#include "ItemFrame.h"
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -181,6 +71,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	GdiplusStartupInput          gin;
 	GdiplusStartup(&token, &gin, NULL);
 
+	// 读取配置文件
+
 	// 创建SpriteView
 	SpriteView SpriteViewCell(hInstance, L"Data\\sprite.gif");
 	SpriteViewCell.SetImageBack(L"Data\\background.png");
@@ -213,10 +105,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	SpriteViewSwitchRigthCell.SetVisable(FALSE);
 
 	CPaintManagerUI::SetInstance(hInstance);
-	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + L"\\SysBtn\\");
 
 	CDuiFrameWnd duiFrame;
-	duiFrame.Create(NULL, _T("DUIWnd"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE);
+
+	duiFrame.Create(NULL, _T("SpriteWmd"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE | WS_EX_ACCEPTFILES);
 	duiFrame.CenterWindow();
 	duiFrame.ShowModal();
 
