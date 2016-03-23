@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="800,600" sizebox="4,4,4,4" caption="0,0,0,32" mininfo="600,400">
+    <VerticalLayout name="VerticalLayoutUI1" bkcolor="#FFF0F0F0" bkcolor2="#FFAAAAA0">
+        <HorizontalLayout name="HorizontalLayoutUI1" height="32" bkcolor="#FFE6E6DC" bkcolor2="#FFAAAAA0">
+			<VerticalLayout name="VerticalLayoutUI2"></VerticalLayout>
+        </HorizontalLayout>
+
+		<HorizontalLayout height="32">
+			<Edit name="ShortKey" pos="0,5,0,0" width="730" height="32" ></Edit>
+			<Option name="Edit" normalimage="Edit.png" hotimage="Edit.png" selectedimage="Edit_S.png"></Option>
+			<Button name="Config" normalimage="Config.png" hotimage="Config_H.png" selectedimage="Config_S.png"></Button>
+		</HorizontalLayout>
+
+		<TileLayout name="ItemList" width="800" height="10"></TileLayout>
+
+	    <HorizontalLayout childpadding="40" height="40">
+           <Option name="List_E" text="程序" width="120" group="true" align="center" selected="true" normalimage="Button_Non.png" hotimage="Button_Hot.png" selectedimage="Button_Hot.png"/>
+		   <Option name="List_D" text="目录" width="120" group="true" align="center" normalimage="Button_Non.png" hotimage="Button_Hot.png" selectedimage="Button_Hot.png"/>
+		   <Option name="List_F" text="文件" width="120" group="true" align="center" normalimage="Button_Non.png" hotimage="Button_Hot.png" selectedimage="Button_Hot.png"/>
+		</HorizontalLayout>
+ 
+		<TabLayout name="Switch">
+				<TileLayout name="ItemList_E" width="800" height="100" columns="8" itemsize="100,100">				  
+				</TileLayout>
+				<TileLayout name="ItemList_D" width="800" height="100" columns="8" itemsize="100,100">
+				</TileLayout>
+				<TileLayout name="ItemList_F" width="800" height="100" columns="8" itemsize="100,100">
+				</TileLayout>
+		</TabLayout>
+
+    </VerticalLayout>
+</Window>

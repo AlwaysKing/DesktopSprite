@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="100,100">
+    <VerticalLayout >
+		<HorizontalLayout height="16">
+			<Text name="Short" width="85" textpadding="2,0,2,0" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="wrap" />
+			<Button name="Delete"  visible="false" float="true" pos="84,0,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="Config.png" hotimage="Config_H.png" selectedimage="Config_S.png"/>
+		</HorizontalLayout>
+
+        
+        <Button name="Image" float="true" pos="20,15,0,0" width="60" height="60" align="center"/>
+        <Text name="Text"  align="center"  endellipsis="true"  showhtml="true" float="true" pos="5,80,0,0" width="90" height="15" textpadding="2,0,2,0" align="wrap" />
+    </VerticalLayout>
+</Window>
