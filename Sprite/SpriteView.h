@@ -3,7 +3,7 @@
 
 class SpriteView;
 
-typedef void(*SpriteCallBack)(SpriteView*, HWND, UINT, LPARAM, LPARAM );
+typedef void(*SpriteCallBack)(SpriteView*, HWND, UINT, WPARAM , LPARAM );
 
 #define WM_MOUSEIN   WM_USER+1
 #define WM_MOUSEOUT  WM_MOUSEIN+1

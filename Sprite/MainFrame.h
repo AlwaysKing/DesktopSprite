@@ -7,6 +7,8 @@
 using namespace std;
 using namespace DuiLib;
 
+typedef void(*pCmdCallBack)(UINT uMsg, WPARAM wParam, LPARAM lParam, HWND hwnd);
+
 class CDuiFrameWnd : public WindowImplBase
 {
 public:
@@ -18,7 +20,10 @@ public:
 	virtual LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM /*lParam*/, bool& /*bHandled*/);
 
+	VOID SetCmdCallback(pCmdCallBack);
+	pCmdCallBack m_CMDFunc;
 	DUI_DECLARE_MESSAGE_MAP()
 
 private:

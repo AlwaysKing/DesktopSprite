@@ -182,20 +182,54 @@ LRESULT CDuiFrameWnd::OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& b
 	return rv;
 }
 
+LRESULT CDuiFrameWnd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled)
+{
+	if (uMsg == WM_KEYDOWN)
+	{
+			switch (wParam)
+			{
+			case VK_RETURN:
+			case VK_ESCAPE://拦截ESC退出界面
+					return FALSE;
+			}
+	}
+	return WindowImplBase::MessageHandler(uMsg, wParam, lParam, bHandled);
+}
+
+VOID CDuiFrameWnd::SetCmdCallback(pCmdCallBack p)
+{
+	m_CMDFunc = p;
+}
+
 LRESULT  CDuiFrameWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	switch(uMsg)
 	{
-		case WM_USER:
+		case WM_COMMAND:
 		{
-			// 托盘点击事件处理
-			if(lParam == WM_RBUTTONDOWN)
+			if(wParam == 0)
 			{
 				if(MessageBox(m_hWnd, L"是否关闭Spite", L"询问", MB_OKCANCEL) == IDOK)
 				{
 					// 清理托盘图标
 					Shell_NotifyIcon(NIM_DELETE, &nid);
 					PostQuitMessage(0);
+				}
+			}
+			else if(m_CMDFunc)
+			{
+				m_CMDFunc(uMsg, wParam, lParam, this->GetHWND());
+			}
+
+		}break;
+		case WM_USER:
+		{
+			// 托盘点击事件处理
+			if(lParam == WM_RBUTTONDOWN)
+			{
+				if(m_CMDFunc)
+				{
+					m_CMDFunc(uMsg, wParam, lParam, this->GetHWND());
 				}
 			}
 
@@ -211,12 +245,14 @@ LRESULT  CDuiFrameWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lPar
 				if(IsWindowVisible(m_hWnd))
 				{
 					ShowWindow(false, false);
+					HLay_Edit->SetText(L"");
 				}
 				else
 				{
 					ShowWindow();
 					SetForegroundWindow(this->GetHWND());
 					SetWindowPos(this->GetHWND(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+					HLay_Edit->SetText(L"");
 				}
 			}
 			break;
@@ -550,7 +586,7 @@ VOID CDuiFrameWnd::OnDropFiles(HWND hwnd, HDROP hDropInfo)
 		}
 
 		CDuiAddFrame duiFrame;
-		duiFrame.Create(NULL, _T("SpriteWmdAdd"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE);
+		duiFrame.Create(NULL, _T("SpriteWmdAdd"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE | WS_EX_TOPMOST);
 		duiFrame.CenterWindow();
 		duiFrame.SetInfo(Type, szFileName, this);
 		duiFrame.ShowModal();

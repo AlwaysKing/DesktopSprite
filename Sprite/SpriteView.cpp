@@ -624,7 +624,7 @@ VOID CALLBACK SpriteView::MouseProcSelf(int nCode, WPARAM wparam, LPARAM lparam)
 					// 发送Leave消息
 					if(m_CallBack != NULL)
 					{
-						m_CallBack(this, m_Hwnd, WM_MOUSEIN, 0, 0);
+						m_CallBack(this, m_Hwnd, WM_MOUSEIN, wparam, lparam);
 					}
 
 					m_MouseIn = TRUE;
@@ -637,7 +637,7 @@ VOID CALLBACK SpriteView::MouseProcSelf(int nCode, WPARAM wparam, LPARAM lparam)
 					// 发送Leave消息
 					if(m_CallBack != NULL)
 					{
-						m_CallBack(this, m_Hwnd, WM_MOUSEOUT, 0, 0);
+						m_CallBack(this, m_Hwnd, WM_MOUSEOUT, wparam, lparam);
 					}
 					m_MouseIn = FALSE;
 				}
@@ -698,7 +698,7 @@ LRESULT CALLBACK SpriteView::MouseProc(int nCode, WPARAM wparam, LPARAM lparam)
 			pMouse->pt.y = 0;
 		}
 
-		if(pMouse->pt.x > g_ScreenHeigth)
+		if(pMouse->pt.y > g_ScreenHeigth)
 		{
 			pMouse->pt.y = g_ScreenHeigth;
 		}
@@ -713,10 +713,6 @@ LRESULT CALLBACK SpriteView::MouseProc(int nCode, WPARAM wparam, LPARAM lparam)
 
 	return CallNextHookEx(g_hook, nCode, wparam, lparam);
 }
-LRESULT CALLBACK MouseProc(int nCode, WPARAM wparam, LPARAM lparam)
-{
-	return CallNextHookEx(g_hook, nCode, wparam, lparam);
-}
 
 VOID SpriteView::InitialFunc(HINSTANCE hInstance)
 {
@@ -724,10 +720,10 @@ VOID SpriteView::InitialFunc(HINSTANCE hInstance)
 	
 	if(g_hook == NULL)
 	{
-#ifndef DEBUG
+//#ifndef DEBUG
 		// Hook全局钩子
 		g_hook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, hInstance, 0);
-#endif
+//#endif
 	}
 }
 
