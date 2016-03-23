@@ -198,20 +198,10 @@ BOOL CDuiAddFrame::ModifyShortCutComo()
 	if(!m_pShortCut){
 		return false;
 	}
-	BOOL* SelectChar;
-
-	m_pShortCut->RemoveAll();
-	switch(m_Type)
-	{
-		case 1: SelectChar = m_pWnd->m_D_char; break;
-		case 2:	SelectChar = m_pWnd->m_E_char; break;
-		case 3:	SelectChar = m_pWnd->m_F_char; break;
-		default:return false;
-	}
 
 	for(int i = 0; i < 26; i++)
 	{
-		if(!SelectChar[i])
+		if(!m_pWnd->TestShortCut(m_Type, i))
 		{
 			// Ìí¼Ó
 			CListLabelElementUI* pItem = new CListLabelElementUI;

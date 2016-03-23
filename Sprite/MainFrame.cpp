@@ -57,9 +57,6 @@ LRESULT CDuiFrameWnd::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bH
 	HLay_Tab_D = static_cast<COptionUI*>( m_PaintManager.FindControl(_T("List_D")) );
 	HLay_Tab_F = static_cast<COptionUI*>( m_PaintManager.FindControl(_T("List_F")) );
 
-	// 读取配置文件
-	LoadDate();
-
 	m_bEditMode = FALSE;
 
 	for(int i = 0; i < 26; i++)
@@ -68,6 +65,9 @@ LRESULT CDuiFrameWnd::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bH
 		m_F_char[i] = false;
 		m_E_char[i] = false;
 	}
+
+	// 读取配置文件
+	LoadDate();
 
 	ShowWindow(false, false);
 
@@ -101,6 +101,7 @@ void CDuiFrameWnd::AddItem(int Type, LPWSTR ShortCutKey, LPWSTR lpszFilePath)
 		if(HLay_F){
 			HLay_F->Add(pUI);
 			m_F_List.insert(make_pair(ShortCutKey[0], pFrame));
+			int i = ShortCutKey[0] - 'A';
 			m_F_char[ShortCutKey[0] - 'A'] = true;
 		}
 	}
@@ -194,6 +195,18 @@ LRESULT CDuiFrameWnd::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bo
 			}
 	}
 	return WindowImplBase::MessageHandler(uMsg, wParam, lParam, bHandled);
+}
+
+BOOL CDuiFrameWnd::TestShortCut(int i, int s)
+{
+	BOOL rv = FALSE;
+	switch (i)
+	{
+		case 1:rv = m_E_char[s]; break;
+		case 2:rv = m_D_char[s]; break;
+		case 3:rv = m_F_char[s]; break;
+	}
+	return rv;
 }
 
 VOID CDuiFrameWnd::SetCmdCallback(pCmdCallBack p)

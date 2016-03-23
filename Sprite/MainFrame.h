@@ -22,6 +22,8 @@ public:
 	virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM /*lParam*/, bool& /*bHandled*/);
 
+	BOOL TestShortCut(int i, int s);
+
 	VOID SetCmdCallback(pCmdCallBack);
 	pCmdCallBack m_CMDFunc;
 	DUI_DECLARE_MESSAGE_MAP()
@@ -53,9 +55,9 @@ private:
 	BOOL SaveData();
 
 public:
-	BOOL m_D_char[26];
-	BOOL m_F_char[26];
-	BOOL m_E_char[26];
+	volatile BOOL m_D_char[26];
+	volatile BOOL m_F_char[26];
+	volatile BOOL m_E_char[26];
 	void AddItem(int Type, LPWSTR ShortCutKey, LPWSTR lpszFilePath);
 	void DeleteItem(int Type, WCHAR ShortCutKey);
 };
