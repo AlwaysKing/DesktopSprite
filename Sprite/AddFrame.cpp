@@ -268,10 +268,6 @@ void CDuiAddFrame::OnClick(TNotifyUI& msg)
 	{
 
 	}
-	else if(msg.pSender->GetName() == _T("DUI_BTN_IMAGE"))
-	{
-
-	}
 }
 
 void CDuiAddFrame::OnItemSelect(TNotifyUI& msg)
@@ -279,11 +275,11 @@ void CDuiAddFrame::OnItemSelect(TNotifyUI& msg)
 	if(msg.pSender->GetName() == _T("DUI_COMB_TYPE"))
 	{
 		CDuiString strInfo = m_pType->GetText();
-		if(strInfo == L"执行文件")
+		if(strInfo == L"EXE")
 		{
 			m_Type = 1;
 		}
-		if(strInfo == L"文件夹")
+		if(strInfo == L"目录")
 		{
 			m_Type = 2;
 		}

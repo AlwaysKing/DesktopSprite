@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <Window size="301,234" sizebox="4,4,4,4" caption="0,0,0,32" roundcorner="5,5">
     <VerticalLayout name="VerticalLayoutUI1" bkcolor="#FFF0F0F0" bkcolor2="#FFAAAAA0">
-        
-		<HorizontalLayout name="HorizontalLayoutUI1" height="32" bkcolor="#FFE6E6DC" bkcolor2="#FFAAAAA0">
+        <HorizontalLayout name="HorizontalLayoutUI1" height="32" bkcolor="#FFE6E6DC" bkcolor2="#FFAAAAA0">
             <VerticalLayout name="VerticalLayoutUI2" />
             <VerticalLayout name="VerticalLayoutUI3" width="77">
                 <Button name="closebtn" tooltip="关闭" float="true" pos="44,5,0,0" width="28" height="19" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage=" file=&apos;CloseNormal.bmp&apos; " hotimage=" file=&apos;CloseFocus.bmp&apos; " pushedimage=" file=&apos;CloseFocus.bmp&apos; " />
             </VerticalLayout>
         </HorizontalLayout>
-
         <HorizontalLayout name="HorizontalLayoutUI2">
             <Label name="LabelUI2" text="文件类型:" float="true" pos="7,44,0,0" width="69" height="30" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" />
             <Label name="LabelUI3" text="快 捷 键:" float="true" pos="157,44,0,0" width="69" height="30" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" />
@@ -16,18 +14,14 @@
             <Label name="LabelUI4" text="显示图标:" float="true" pos="8,89,0,0" width="69" height="30" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" />
             <Button name="DUI_BTN_IMAGE" float="true" pos="89,92,0,0" width="60" height="60" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
             <Edit name="DUI_TXT_PATH" float="true" pos="86,8,0,0" width="213" height="30" bkcolor="#FFFFFFFF" textpadding="4,3,4,3" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" />
-            <Combo dropboxsize="0,150" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" name="DUI_COMB_TYPE" float="true" pos="88,43,0,0" width="60" height="30">
-				<ListLabelElement text="执行文件" selected="true" />
-                <ListLabelElement text="文件夹" />
-				<ListLabelElement text="文件" />
-			</Combo>
-
-            <Combo dropboxsize="0,150" vscrollbar="true"  hscrollbar="true" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" name="DUI_TXT_SHORTCUT" float="true" pos="237,44,0,0" width="60" height="30">
-			</Combo>
-
+            <Combo dropboxsize="0,150" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" name="DUI_COMB_TYPE" text="执行文件" float="true" pos="88,44,0,0" width="60" height="30" bkcolor="#FFFFFFFF">
+                <ListLabelElement text="EXE"/>
+                <ListLabelElement text="目录"/>
+                <ListLabelElement text="文件"/>
+            </Combo>
+            <Combo dropboxsize="0,150" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#FFC1E3FF" itemhottextcolor="#FF000000" itemhotbkcolor="#FFE9F5FF" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" name="DUI_TXT_SHORTCUT" float="true" pos="237,44,0,0" width="60" height="30" bkcolor="#FFFFFFFF" />
             <Button name="DUI_BTN_OK" text="确定" float="true" pos="71,164,0,0" width="80" height="30" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
             <Button name="DUI_BTN_CANCEL" text="取消" float="true" pos="156,164,0,0" width="80" height="30" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
         </HorizontalLayout>
-
     </VerticalLayout>
 </Window>

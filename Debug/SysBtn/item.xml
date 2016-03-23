@@ -3,7 +3,7 @@
     <VerticalLayout >
 		<HorizontalLayout height="16">
 			<Text name="Short" width="85" textpadding="2,0,2,0" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="wrap" />
-			<Button name="Delete"  visible="false" float="true" pos="84,0,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="Config.png" hotimage="Config_H.png" selectedimage="Config_S.png"/>
+			<Button name="Delete"  visible="false" float="true" pos="75,0,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="Delete.png" hotimage="Delete.png" selectedimage="Delete.png"/>
 		</HorizontalLayout>
 
         
